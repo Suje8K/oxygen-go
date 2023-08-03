@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  postgres-db:
+    container_name: oxygen-pg
+    image: postgres:15.3
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    networks:
+      app_net:
+        ipv4_address: 192.168.1.2
+    environment:
+      POSTGRES_PASSWORD: oxygenpass
+      POSTGRES_USER: oxygenuser
+      POSTGRES_DB: oxygendb
+
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4:7.0
+    ports:
+      - "9092:80"
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
+    networks:
+      app_net:
+        ipv4_address: 192.168.1.3
+    environment:
+      PGADMIN_DEFAULT_EMAIL: sujeet@sujeetk.in
+      PGADMIN_DEFAULT_PASSWORD: oxygenpass
+
+networks:
+  app_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.1.0/24"
+          gateway: 192.168.1.1
