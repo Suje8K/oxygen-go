@@ -386,7 +386,7 @@ func (ss *sqlStore) GetSignedInUser(ctx context.Context, query *user.GetSignedIn
 
 		var rawSQL = `SELECT
 		u.id                  as user_id,
-		u.is_admin            as is_grafana_admin,
+		u.is_admin            as is_oxygen_admin,
 		u.email               as email,
 		u.login               as login,
 		u.name                as name,
@@ -452,15 +452,15 @@ func (ss *sqlStore) GetProfile(ctx context.Context, query *user.GetUserProfileQu
 		}
 
 		userProfile = user.UserProfileDTO{
-			ID:             usr.ID,
-			Name:           usr.Name,
-			Email:          usr.Email,
-			Login:          usr.Login,
-			Theme:          usr.Theme,
-			IsGrafanaAdmin: usr.IsAdmin,
-			IsDisabled:     usr.IsDisabled,
-			UpdatedAt:      usr.Updated,
-			CreatedAt:      usr.Created,
+			ID:            usr.ID,
+			Name:          usr.Name,
+			Email:         usr.Email,
+			Login:         usr.Login,
+			Theme:         usr.Theme,
+			IsOxygenAdmin: usr.IsAdmin,
+			IsDisabled:    usr.IsDisabled,
+			UpdatedAt:     usr.Updated,
+			CreatedAt:     usr.Created,
 		}
 
 		return err
@@ -526,7 +526,7 @@ func validateOneAdminLeft(ctx context.Context, sess *db.Session) error {
 	}
 
 	if count == 0 {
-		return user.ErrLastGrafanaAdmin
+		return user.ErrUserNotFound
 	}
 
 	return nil

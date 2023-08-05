@@ -5,7 +5,6 @@ import (
 	"github.com/Suj8K/oxygen-go/services/sqlstore"
 	"github.com/Suj8K/oxygen-go/services/sqlstore/migrator"
 	"github.com/Suj8K/oxygen-go/services/sqlstore/session"
-	"os"
 )
 
 type DB interface {
@@ -25,11 +24,3 @@ type DB interface {
 type Session = sqlstore.DBSession
 
 var ProvideService = sqlstore.ProvideService
-
-func IsTestDbPostgres() bool {
-	if db, present := os.LookupEnv("GRAFANA_TEST_DB"); present {
-		return db == migrator.Postgres
-	}
-
-	return false
-}

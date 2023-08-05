@@ -26,7 +26,7 @@ func PostgresTestDB() TestDB {
 	if port == "" {
 		port = "5432"
 	}
-	connStr := fmt.Sprintf("user=grafanatest password=grafanatest host=%s port=%s dbname=grafanatest sslmode=disable",
+	connStr := fmt.Sprintf("user=oxygenuser password=oxygenpass host=%s port=%s dbname=oxygendb sslmode=disable",
 		host, port)
 	return TestDB{
 		DriverName: "postgres",

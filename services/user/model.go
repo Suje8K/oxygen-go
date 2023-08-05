@@ -22,7 +22,6 @@ var (
 	ErrCaseInsensitive   = errors.New("case insensitive conflict")
 	ErrUserNotFound      = errors.New("user not found")
 	ErrUserAlreadyExists = errors.New("user already exists")
-	ErrLastGrafanaAdmin  = errors.New("cannot remove last grafana admin")
 	ErrProtectedUser     = errors.New("cannot adopt protected user")
 	ErrNoUniqueID        = errors.New("identifying id not found")
 )
@@ -142,7 +141,7 @@ type UserProfileDTO struct {
 	Login              string          `json:"login"`
 	Theme              string          `json:"theme"`
 	OrgID              int64           `json:"orgId,omitempty"`
-	IsGrafanaAdmin     bool            `json:"isGrafanaAdmin"`
+	IsOxygenAdmin      bool            `json:"isOxygenAdmin"`
 	IsDisabled         bool            `json:"isDisabled"`
 	IsExternal         bool            `json:"isExternal"`
 	IsExternallySynced bool            `json:"isExternallySynced"`
@@ -204,7 +203,7 @@ type SignedInUser struct {
 	ApiKeyID         int64 `xorm:"api_key_id"`
 	IsServiceAccount bool  `xorm:"is_service_account"`
 	OrgCount         int
-	IsGrafanaAdmin   bool
+	IsOxygenAdmin    bool
 	IsAnonymous      bool
 	IsDisabled       bool
 	HelpFlags1       HelpFlags1
